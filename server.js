@@ -34,6 +34,8 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines
 // Connect to the Mongo DB
 mongoose.Promise = Promise;
 mongoose.connect(MONGODB_URI);
+mongoose.connection.once('open', () => { console.log('MongoDB Connected'); });
+mongoose.connection.on('error', (err) => { console.log('MongoDB connection error: ', err); });
 // Routes
 
 // A GET route for scraping the echoJS website
